@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Greeting App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      /* Add some styles to the form */
+      form {
+        margin-top: 50px;
+        text-align: center;
+      }
+      input[type="text"] {
+        width: 300px;
+        height: 30px;
+        margin-bottom: 10px;
+        padding: 5px;
+        font-size: 16px;
+      }
+      input[type="submit"] {
+        width: 100px;
+        height: 30px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="greeting-form">
+      <label for="fname">First name:</label><br>
+      <input type="text" id="fname" name="fname"><br>
+      <label for="lname">Last name:</label><br>
+      <input type="text" id="lname" name="lname"><br><br>
+      <input type="submit" value="Submit">
+    </form>
+    <div id="greeting-response"></div>
+
+    <script>
+      const form = document.getElementById("greeting-form");
+      const responseDiv = document.getElementById("greeting-response");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const fname = document.getElementById("fname").value;
+        const lname = document.getElementById("lname").value;
+
+        // Send a GET request to the Flask API
+        fetch(`/greet?fname=${fname}&lname=${lname}`)
+          .then(response => response.json())
+          .then(data => {
+            responseDiv.innerText = data.data;
+          });
+      });
+    </script>
+  </body>
+</html>
