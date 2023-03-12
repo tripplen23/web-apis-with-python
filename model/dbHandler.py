@@ -32,7 +32,7 @@ def match_like(word: str) -> list:
     db = SQL.connect("data/dictionary.db")
 
     # TODO: Query the database for exact matches
-    sql_query="SELECT * FROM dictionary WHERE word LIKE ?"
+    sql_query="SELECT * from entries WHERE word LIKE ?"
     match = db.execute(sql_query,("%" + word + "%",)).fetchall()
 
     # TODO: Clone the connection to the database
